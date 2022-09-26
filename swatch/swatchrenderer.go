@@ -7,27 +7,27 @@ import (
 	"fyne.io/fyne/v2/canvas"
 )
 
-type SwatchRender struct {
+type SwatchRenderer struct {
 	square  canvas.Rectangle
 	objects []fyne.CanvasObject
 	parent  *Swatch
 }
 
-func (renderer *SwatchRender) MinSize() fyne.Size {
+func (renderer *SwatchRenderer) MinSize() fyne.Size {
 	return renderer.square.MinSize()
 }
 
-func (renderer *SwatchRender) Layout(size fyne.Size) {
+func (renderer *SwatchRenderer) Layout(size fyne.Size) {
 	renderer.objects[0].Resize(size)
 }
 
-func (renderer *SwatchRender) Refresh() {
+func (renderer *SwatchRenderer) Refresh() {
 	renderer.Layout(fyne.NewSize(20, 20))
 	renderer.square.FillColor = renderer.parent.Color
 
 	if renderer.parent.Selected {
 		renderer.square.StrokeWidth = 3
-		renderer.square.StrokeColor = color.NRGBA64{255, 255, 255, 255}
+		renderer.square.StrokeColor = color.NRGBA{0, 0, 0, 255}
 		renderer.objects[0] = &renderer.square
 	} else {
 		renderer.square.StrokeWidth = 0
@@ -37,8 +37,8 @@ func (renderer *SwatchRender) Refresh() {
 	canvas.Refresh(renderer.parent)
 }
 
-func (renderer *SwatchRender) Objects() []fyne.CanvasObject {
+func (renderer *SwatchRenderer) Objects() []fyne.CanvasObject {
 	return renderer.objects
 }
 
-func (renderer *SwatchRender) Destroy() {}
+func (renderer *SwatchRenderer) Destroy() {}
