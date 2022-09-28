@@ -20,11 +20,11 @@ type State struct {
 	BrushColor     color.Color
 	BrushType      int
 	SwatchSelected int
-	filePath       string
+	FilePath       string
 }
 
 func (state *State) SetFilePath(path string) {
-	state.filePath = path
+	state.FilePath = path
 }
 
 type Brushable interface {
